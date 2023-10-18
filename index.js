@@ -29,24 +29,41 @@ async function run() {
     const cars = client.db("cars");
     const carsCollection = cars.collection("collection");
 
+    const carts = client.db("cars");
+    const cartsCollection = carts.collection("carts");
+
     app.get("/cars", async(req,res) => {
       const cursor = carsCollection.find();
       const result = await cursor.toArray();
       res.send(result);
     })
 
-    // app.get("/cars/:id", async(req,res) => {
-    //   const id = req.params.id;
-    //   console.log(id);
-    //   const query = { _id: new ObjectId(id)};
-    //   const result = await carsCollection.findOne(query);
-    //   res.send(result)
-    // })
+    app.get("/cars/:id", async(req,res) => {
+      const id = req.params.id;
+      console.log(id);
+      const query = { _id: new ObjectId(id)};
+      const result = await carsCollection.findOne(query);
+      res.send(result)
+    })
 
     app.post("/cars", async(req,res) => {
       const user = req.body;
       console.log(user);
       const result = await carsCollection.insertOne(user);
+      res.send(result);
+    })
+
+
+    // Carts collection
+   app.get("/carts", async(req,res) => {
+    const cursor = cartsCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+   })
+
+    app.post("/carts", async(req,res) => {
+      const user = req.body;
+      const result = await cartsCollection.insertOne(user);
       res.send(result);
     })
 
