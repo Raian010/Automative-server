@@ -23,6 +23,8 @@ async function run() {
   try {
     await client.connect();
 
+    // cars collection
+
     const cars = client.db("cars");
     const carsCollection = cars.collection("collection");
 
