@@ -42,6 +42,7 @@ async function run() {
     //   res.send(result)
     // })
 
+    // Posting cars databse in mongodb
     app.post("/cars", async (req, res) => {
       const user = req.body;
       console.log(user);
